@@ -1,6 +1,6 @@
 package org.example.recappokedexservice.controller;
 
-import org.example.recappokedexservice.dto.PokemonResponse;
+import jakarta.validation.Valid;
 import org.example.recappokedexservice.model.Pokemon;
 import org.example.recappokedexservice.service.PokemonService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +19,7 @@ public class PokemonController {
     }
 
     @GetMapping("/pokemon/{name}")
-    public Pokemon getPokemonByName(@PathVariable String name) {
+    public Pokemon getPokemonByName(@PathVariable @Valid String name) {
         return this.pokemonService.getPokemonByName(name);
     }
 }

@@ -1,5 +1,6 @@
 package org.example.recappokedexservice.service;
 
+import jakarta.validation.Valid;
 import org.example.recappokedexservice.dto.PokemonResponse;
 import org.example.recappokedexservice.model.Pokemon;
 import org.example.recappokedexservice.repository.PokemonRepo;
@@ -25,6 +26,7 @@ public class PokemonService {
     public Pokemon getPokemonByName(String name) {
         PokemonResponse pokemonResponse = this.restClient.get().uri("/api/v2/pokemon/{name}", name).retrieve().body(PokemonResponse.class);
 
+        assert pokemonResponse != null;
         List<String> types = pokemonResponse.types().stream()
                 .map(type -> type.type().name())
                 .toList();

@@ -1,4 +1,9 @@
 package org.example.recappokedexservice.dto.artwork;
 
-public record OfficialArtworkDTO(String front_default, String front_shiny) {
+import jakarta.validation.constraints.*;
+
+public record OfficialArtworkDTO(
+        @NotBlank(message = "PictureUrl can not be blank.") String front_default,
+        String front_shiny
+) {
 }
