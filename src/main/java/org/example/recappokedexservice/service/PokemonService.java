@@ -1,6 +1,5 @@
 package org.example.recappokedexservice.service;
 
-import jakarta.validation.Valid;
 import org.example.recappokedexservice.dto.PokemonResponse;
 import org.example.recappokedexservice.dto.client.FavoriteDTO;
 import org.example.recappokedexservice.exceptions.PokemonNotFoundException;
@@ -10,9 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientException;
-import org.springframework.web.servlet.function.EntityResponse;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -60,20 +57,15 @@ public class PokemonService {
         return favoriteDTO;
     }
 
-    public List<FavoriteDTO> getFavorites() {
-        List<Pokemon> pokemons = this.pokemonRepo.findAll();
-        List<FavoriteDTO> favoriteDTOs = new ArrayList<>();
-
-        pokemons.forEach(pokemon -> {
-            favoriteDTOs.add(FavoriteDTO.builder().build().withNickname(pokemon.nickname()).withPokemonName(pokemon.pokemonName()));
-        });
-
-        return favoriteDTOs;
+    public List<Pokemon> getFavorites() {
+        return this.pokemonRepo.findAll();
     }
 
-    public FavoriteDTO getFavoriteByName(String pokemonName) {
-        Pokemon pokemon = this.pokemonRepo.getPokemonByPokemonName(pokemonName);
+    public Pokemon getFavoriteById(String id) {
+        return this.pokemonRepo.getPokemonById(id);
+    }
 
-        return FavoriteDTO.builder().build().withNickname(pokemon.nickname()).withPokemonName(pokemon.pokemonName());
+    public void deleteFavoriteById(String id) {
+        this.pokemonRepo.deleteById(id);
     }
 }

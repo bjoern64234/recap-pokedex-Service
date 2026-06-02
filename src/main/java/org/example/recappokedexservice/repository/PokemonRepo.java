@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface PokemonRepo extends MongoRepository<Pokemon, String> {
-    Pokemon getPokemonByPokemonName(String pokemonName);
+    Pokemon getPokemonById(String id);
 }

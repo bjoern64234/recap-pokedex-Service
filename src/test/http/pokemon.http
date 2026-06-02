@@ -18,5 +18,8 @@ Content-Type: application/json
 ### Get all favorites
 GET {{localhost}}:{{port}}/api/v2/collection
 
-### Get pokemon by name
-GET {{localhost}}:{{port}}/api/v2/collection/clefairy
+### Get pokemon by id
+GET {{localhost}}:{{port}}/api/v2/collection/c3150679-0a3a-4a3b-a6cc-490b8c042e7b
+
+### Delete pokemon by id
+DELETE {{localhost}}:{{port}}/api/v2/collection/f314e94c-5398-49d2-b68d-56ff2ca0b475
