@@ -68,4 +68,9 @@ public class PokemonService {
     public void deleteFavoriteById(String id) {
         this.pokemonRepo.deleteById(id);
     }
+
+    public void updateFavoriteById(String id, FavoriteDTO favoriteDTO) {
+        Pokemon pokemon = this.getFavoriteById(id).withNickname(favoriteDTO.nickname());
+        this.pokemonRepo.save(pokemon);
+    }
 }

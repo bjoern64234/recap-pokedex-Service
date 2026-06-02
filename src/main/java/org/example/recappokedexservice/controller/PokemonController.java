@@ -52,4 +52,11 @@ public class PokemonController {
 
         return Map.of("message", "The pokemon with the id " + id + " was deleted.");
     }
+
+    @PutMapping("/collection/{id}")
+    public Map<String, String> updatePokemonCollection(@RequestBody @Valid FavoriteDTO favoriteDTO, @PathVariable @Pattern(regexp = "[0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12}") String id) {
+        this.pokemonService.updateFavoriteById(id, favoriteDTO);
+
+        return Map.of("nickname", favoriteDTO.nickname());
+    }
 }
