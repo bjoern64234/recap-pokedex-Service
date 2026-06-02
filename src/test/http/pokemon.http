@@ -6,11 +6,14 @@ POST {{localhost}}:{{port}}/api/v2/collection
 Content-Type: application/json
 
 {
-  "pokemonName": "ditto",
-  "nickname": "Mein Starter"
+  "pokemonName": "pikachu",
+  "nickname": "Mein Starter 3"
 }
 
 > {%
     var res = response.body
     client.global.set("id", res.id)
 %}
+
+### Get all favorites
+GET {{localhost}}:{{port}}/api/v2/collection

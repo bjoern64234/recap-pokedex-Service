@@ -6,6 +6,8 @@ import org.example.recappokedexservice.model.Pokemon;
 import org.example.recappokedexservice.service.PokemonService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/api/v2")
@@ -25,5 +27,10 @@ public class PokemonController {
     @PostMapping("/collection")
     public FavoriteDTO getPokemonCollection(@RequestBody @Valid FavoriteDTO favoriteDTO) {
         return this.pokemonService.saveFavorite(favoriteDTO);
+    }
+
+    @GetMapping("/collection")
+    public List<FavoriteDTO> getPokemonCollection() {
+        return this.pokemonService.getFavorites();
     }
 }

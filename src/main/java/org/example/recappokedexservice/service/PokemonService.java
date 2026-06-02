@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -56,5 +57,16 @@ public class PokemonService {
 
         this.pokemonRepo.save(pokemon);
         return favoriteDTO;
+    }
+
+    public List<FavoriteDTO> getFavorites() {
+        List<Pokemon> pokemons = this.pokemonRepo.findAll();
+        List<FavoriteDTO> favoriteDTOs = new ArrayList<>();
+
+        pokemons.forEach(pokemon -> {
+            favoriteDTOs.add(FavoriteDTO.builder().build().withNickname(pokemon.nickname()).withPokemonName(pokemon.pokemonName()));
+        });
+
+        return favoriteDTOs;
     }
 }
