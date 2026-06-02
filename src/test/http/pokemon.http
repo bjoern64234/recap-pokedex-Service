@@ -19,7 +19,7 @@ Content-Type: application/json
 GET {{localhost}}:{{port}}/api/v2/collection
 
 ### Get pokemon by id
-GET {{localhost}}:{{port}}/api/v2/collection/c3150679-0a3a-4a3b-a6cc-490b8c042e7b
+GET {{localhost}}:{{port}}/api/v2/collection/8097255c-6975-486a-b048-d023359a4811
 
 ### Delete pokemon by id
 DELETE {{localhost}}:{{port}}/api/v2/collection/f314e94c-5398-49d2-b68d-56ff2ca0b475

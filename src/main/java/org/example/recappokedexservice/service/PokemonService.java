@@ -2,6 +2,7 @@ package org.example.recappokedexservice.service;
 
 import org.example.recappokedexservice.dto.PokemonResponse;
 import org.example.recappokedexservice.dto.client.FavoriteDTO;
+import org.example.recappokedexservice.exceptions.CollectionEntryNotFoundException;
 import org.example.recappokedexservice.exceptions.PokemonNotFoundException;
 import org.example.recappokedexservice.model.Pokemon;
 import org.example.recappokedexservice.repository.PokemonRepo;
@@ -62,7 +63,13 @@ public class PokemonService {
     }
 
     public Pokemon getFavoriteById(String id) {
-        return this.pokemonRepo.getPokemonById(id);
+        Pokemon pokemon = this.pokemonRepo.getPokemonById(id);
+
+        if (pokemon == null) {
+            throw new CollectionEntryNotFoundException("Pokemon was not found");
+        }
+
+        return pokemon;
     }
 
     public void deleteFavoriteById(String id) {
