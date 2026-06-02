@@ -1,2 +1,16 @@
 ### Get pokemon by name
-GET {{localhost}}:{{port}}/api/v2/pokemon/dittoo
+GET {{localhost}}:{{port}}/api/v2/pokemon/ditto
+
+### Save a favorite pokemon
+POST {{localhost}}:{{port}}/api/v2/collection
+Content-Type: application/json
+
+{
+  "pokemonName": "ditto",
+  "nickname": "Mein Starter"
+}
+
+> {%
+    var res = response.body
+    client.global.set("id", res.id)
+%}

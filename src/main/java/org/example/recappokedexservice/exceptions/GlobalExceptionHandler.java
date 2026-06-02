@@ -1,8 +1,6 @@
 package org.example.recappokedexservice.exceptions;
 
-import jakarta.validation.ConstraintViolationException;
 import org.jspecify.annotations.Nullable;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;

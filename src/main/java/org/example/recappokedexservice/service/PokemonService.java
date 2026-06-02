@@ -2,11 +2,14 @@ package org.example.recappokedexservice.service;
 
 import jakarta.validation.Valid;
 import org.example.recappokedexservice.dto.PokemonResponse;
+import org.example.recappokedexservice.dto.client.FavoriteDTO;
+import org.example.recappokedexservice.exceptions.PokemonNotFoundException;
 import org.example.recappokedexservice.model.Pokemon;
 import org.example.recappokedexservice.repository.PokemonRepo;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
+import org.springframework.web.client.RestClientException;
 
 import java.util.List;
 
@@ -24,9 +27,16 @@ public class PokemonService {
     }
 
     public Pokemon getPokemonByName(String name) {
-        PokemonResponse pokemonResponse = this.restClient.get().uri("/api/v2/pokemon/{name}", name).retrieve().body(PokemonResponse.class);
+        PokemonResponse pokemonResponse;
+        try {
+            pokemonResponse = this.restClient.get()
+                    .uri("/api/v2/pokemon/{name}", name)
+                    .retrieve()
+                    .body(PokemonResponse.class);
+        } catch (RestClientException e) {
+            throw new PokemonNotFoundException(name);
+        }
 
-        assert pokemonResponse != null;
         List<String> types = pokemonResponse.types().stream()
                 .map(type -> type.type().name())
                 .toList();
@@ -38,5 +48,13 @@ public class PokemonService {
                 .withHeight(pokemonResponse.height())
                 .withWeight(pokemonResponse.weight())
                 .withPictureUrl(pokemonResponse.sprites().other().official_artwork().front_default()).withTypes(types);
+    }
+
+    public FavoriteDTO saveFavorite(FavoriteDTO favoriteDTO) {
+        Pokemon pokemon = this.getPokemonByName(favoriteDTO.pokemonName())
+                .withNickname(favoriteDTO.nickname());
+
+        this.pokemonRepo.save(pokemon);
+        return favoriteDTO;
     }
 }
