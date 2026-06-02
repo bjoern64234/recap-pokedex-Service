@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientException;
+import org.springframework.web.servlet.function.EntityResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,5 +69,11 @@ public class PokemonService {
         });
 
         return favoriteDTOs;
+    }
+
+    public FavoriteDTO getFavoriteByName(String pokemonName) {
+        Pokemon pokemon = this.pokemonRepo.getPokemonByPokemonName(pokemonName);
+
+        return FavoriteDTO.builder().build().withNickname(pokemon.nickname()).withPokemonName(pokemon.pokemonName());
     }
 }

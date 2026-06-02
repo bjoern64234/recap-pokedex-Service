@@ -17,3 +17,6 @@ Content-Type: application/json
 
 ### Get all favorites
 GET {{localhost}}:{{port}}/api/v2/collection
+
+### Get pokemon by name
+GET {{localhost}}:{{port}}/api/v2/collection/clefairy

@@ -33,4 +33,9 @@ public class PokemonController {
     public List<FavoriteDTO> getPokemonCollection() {
         return this.pokemonService.getFavorites();
     }
+
+    @GetMapping("/collection/{pokemonName}")
+    public FavoriteDTO getPokemonCollection(@PathVariable @Valid String pokemonName) {
+        return this.pokemonService.getFavoriteByName(pokemonName);
+    }
 }
