@@ -1,0 +1,5 @@
+### Get pokemon by name
+GET {{localhost}}:{{port}}/api/v2/pokemon/clefairy
+
+### GET pokemon by url
+GET https://pokeapi.co/api/v2/pokemon/ditto
