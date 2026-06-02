@@ -1,11 +1,8 @@
 package org.example.recappokedexservice.service;
 
 import org.example.recappokedexservice.dto.PokemonResponse;
-import org.example.recappokedexservice.dto.client.FavoriteDTO;
-import org.example.recappokedexservice.exceptions.CollectionEntryNotFoundException;
 import org.example.recappokedexservice.exceptions.PokemonNotFoundException;
 import org.example.recappokedexservice.model.Pokemon;
-import org.example.recappokedexservice.repository.PokemonRepo;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
@@ -17,13 +14,9 @@ import java.util.List;
 public class PokemonService {
 
     private final RestClient restClient;
-    private final PokemonRepo pokemonRepo;
-    private final IdService idService;
 
-    public PokemonService(@Qualifier("pokemonRestClient") RestClient restClient, PokemonRepo pokemonRepo, IdService idService) {
+    public PokemonService(@Qualifier("pokemonRestClient") RestClient restClient) {
         this.restClient = restClient;
-        this.pokemonRepo = pokemonRepo;
-        this.idService = idService;
     }
 
     public Pokemon getPokemonByName(String name) {
@@ -42,42 +35,10 @@ public class PokemonService {
                 .toList();
 
         return Pokemon.builder().build()
-                .withId(this.idService.generateId())
                 .withPokemonId(pokemonResponse.id())
                 .withPokemonName(pokemonResponse.name())
                 .withHeight(pokemonResponse.height())
                 .withWeight(pokemonResponse.weight())
                 .withPictureUrl(pokemonResponse.sprites().other().official_artwork().front_default()).withTypes(types);
-    }
-
-    public FavoriteDTO saveFavorite(FavoriteDTO favoriteDTO) {
-        Pokemon pokemon = this.getPokemonByName(favoriteDTO.pokemonName())
-                .withNickname(favoriteDTO.nickname());
-
-        this.pokemonRepo.save(pokemon);
-        return favoriteDTO;
-    }
-
-    public List<Pokemon> getFavorites() {
-        return this.pokemonRepo.findAll();
-    }
-
-    public Pokemon getFavoriteById(String id) {
-        Pokemon pokemon = this.pokemonRepo.getPokemonById(id);
-
-        if (pokemon == null) {
-            throw new CollectionEntryNotFoundException("Pokemon was not found");
-        }
-
-        return pokemon;
-    }
-
-    public void deleteFavoriteById(String id) {
-        this.pokemonRepo.deleteById(id);
-    }
-
-    public void updateFavoriteById(String id, FavoriteDTO favoriteDTO) {
-        Pokemon pokemon = this.getFavoriteById(id).withNickname(favoriteDTO.nickname());
-        this.pokemonRepo.save(pokemon);
     }
 }

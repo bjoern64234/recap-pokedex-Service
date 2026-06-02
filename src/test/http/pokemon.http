@@ -2,12 +2,12 @@
 GET {{localhost}}:{{port}}/api/v2/pokemon/ditto
 
 ### Save a favorite pokemon
-POST {{localhost}}:{{port}}/api/v2/collection
+POST {{localhost}}:{{port}}/api/collection
 Content-Type: application/json
 
 {
-  "pokemonName": "pikachu",
-  "nickname": "Mein Starter 3"
+  "pokemonName": "clefairy",
+  "nickname": "Mein Starter 2"
 }
 
 > {%
@@ -16,16 +16,16 @@ Content-Type: application/json
 %}
 
 ### Get all favorites
-GET {{localhost}}:{{port}}/api/v2/collection
+GET {{localhost}}:{{port}}/api/collection
 
 ### Get pokemon by id
-GET {{localhost}}:{{port}}/api/v2/collection/8097255c-6975-486a-b048-d023359a4811
+GET {{localhost}}:{{port}}/api/collection/ea9cf0c4-2da1-4724-abb9-b80b5d1fbedf
 
 ### Delete pokemon by id
-DELETE {{localhost}}:{{port}}/api/v2/collection/f314e94c-5398-49d2-b68d-56ff2ca0b475
+DELETE {{localhost}}:{{port}}/api/collection/ea9cf0c4-2da1-4724-abb9-b80b5d1fbedf
 
 ### Update pokemon by id
-PUT {{localhost}}:{{port}}/api/v2/collection/8097255c-6975-486a-b048-d023359a4803
+PUT {{localhost}}:{{port}}/api/collection/ea9cf0c4-2da1-4724-abb9-b80b5d1fbedf
 Content-Type: application/json
 
 {
