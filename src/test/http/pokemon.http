@@ -19,13 +19,13 @@ Content-Type: application/json
 GET {{localhost}}:{{port}}/api/collection
 
 ### Get pokemon by id
-GET {{localhost}}:{{port}}/api/collection/ea9cf0c4-2da1-4724-abb9-b80b5d1fbedf
+GET {{localhost}}:{{port}}/api/collection/{{id}}
 
 ### Delete pokemon by id
-DELETE {{localhost}}:{{port}}/api/collection/ea9cf0c4-2da1-4724-abb9-b80b5d1fbedf
+DELETE {{localhost}}:{{port}}/api/collection/{{id}}
 
 ### Update pokemon by id
-PUT {{localhost}}:{{port}}/api/collection/ea9cf0c4-2da1-4724-abb9-b80b5d1fbedf
+PUT {{localhost}}:{{port}}/api/collection/{{id}}
 Content-Type: application/json
 
 {
