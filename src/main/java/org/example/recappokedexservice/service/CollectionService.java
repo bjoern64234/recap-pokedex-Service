@@ -21,13 +21,12 @@ public class CollectionService {
         this.idService = idService;
     }
 
-    public FavoriteDTO saveFavorite(FavoriteDTO favoriteDTO) {
+    public Pokemon saveFavorite(FavoriteDTO favoriteDTO) {
         Pokemon pokemon = this.pokemonService.getPokemonByName(favoriteDTO.pokemonName())
                 .withId(this.idService.generateId())
                 .withNickname(favoriteDTO.nickname());
 
-        this.pokemonRepo.save(pokemon);
-        return favoriteDTO;
+        return this.pokemonRepo.save(pokemon);
     }
 
     public List<Pokemon> getFavorites() {

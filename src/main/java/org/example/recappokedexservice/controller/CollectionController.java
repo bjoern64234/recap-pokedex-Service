@@ -23,7 +23,7 @@ public class CollectionController {
     }
 
     @PostMapping("/collection")
-    public FavoriteDTO getPokemonCollection(@RequestBody @Valid FavoriteDTO favoriteDTO) {
+    public Pokemon getPokemonCollection(@RequestBody @Valid FavoriteDTO favoriteDTO) {
         return this.collectionService.saveFavorite(favoriteDTO);
     }
 
