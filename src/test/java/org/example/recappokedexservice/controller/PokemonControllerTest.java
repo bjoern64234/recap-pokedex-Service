@@ -28,8 +28,13 @@ class PokemonControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
+
     @Autowired
     private MockRestServiceServer mockRestServiceServer;
+
+    // -------------------------------------------------------------------------
+    // GET /api/v2
+    // -------------------------------------------------------------------------
 
     @Test
     void getPokemonByName_shouldReturnMappedPokemon_whenPokeApiResponds() throws Exception {

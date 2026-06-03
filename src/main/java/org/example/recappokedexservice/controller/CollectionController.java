@@ -23,29 +23,29 @@ public class CollectionController {
     }
 
     @PostMapping("/collection")
-    public Pokemon getPokemonCollection(@RequestBody @Valid FavoriteDTO favoriteDTO) {
+    public Pokemon saveFavoritPokemon(@RequestBody @Valid FavoriteDTO favoriteDTO) {
         return this.collectionService.saveFavorite(favoriteDTO);
     }
 
     @GetMapping("/collection")
-    public List<Pokemon> getPokemonCollection() {
+    public List<Pokemon> getAllPokemon() {
         return this.collectionService.getFavorites();
     }
 
     @GetMapping("/collection/{id}")
-    public Pokemon getPokemonCollection(@PathVariable @Pattern(regexp = "[0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12}", message = "The requested id must be a type of uuid.") String id) {
+    public Pokemon getPokemonById(@PathVariable @Pattern(regexp = "[0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12}", message = "The requested id must be a type of uuid.") String id) {
         return this.collectionService.getFavoriteById(id);
     }
 
     @DeleteMapping("/collection/{id}")
-    public Map<String, String> deletePokemonCollection(@PathVariable @Pattern(regexp = "[0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12}", message = "The requested id must be a type of uuid.") String id) {
+    public Map<String, String> deletePokemonById(@PathVariable @Pattern(regexp = "[0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12}", message = "The requested id must be a type of uuid.") String id) {
         this.collectionService.deleteFavoriteById(id);
 
         return Map.of("message", "The pokemon with the id " + id + " was deleted.");
     }
 
     @PutMapping("/collection/{id}")
-    public Map<String, String> updatePokemonCollection(@RequestBody @Valid FavoriteDTO favoriteDTO, @PathVariable @Pattern(regexp = "[0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12}") String id) {
+    public Map<String, String> updatePokemonById(@RequestBody @Valid FavoriteDTO favoriteDTO, @PathVariable @Pattern(regexp = "[0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12}") String id) {
         this.collectionService.updateFavoriteById(id, favoriteDTO);
 
         return Map.of("nickname", favoriteDTO.nickname());
